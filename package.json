@@ -1,6 +1,6 @@
 {
   "name": "@sammce/next-git-viewer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "See the git history of a file in a Next.js app",
   "repository": "sammce/next-git-viewer",
   "main": "dist/index.js",
