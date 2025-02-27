@@ -1,0 +1,24 @@
+{
+  "name": "next-git-viewer",
+  "version": "0.0.1",
+  "description": "See the git history of a file in a Next.js app",
+  "repository": "sammce/next-git-viewer",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Sam McElligott",
+  "license": "ISC",
+  "packageManager": "pnpm@10.4.1",
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "@types/react": "^19.0.10",
+    "typescript": "^5.7.3"
+  }
+}
