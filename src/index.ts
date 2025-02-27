@@ -1,6 +1,9 @@
+// Component export
 export { default as GitCommitSelector } from "./components/GitCommitSelector";
 
-export { default as checkout } from "./api/checkout";
-export { default as commits } from "./api/commits";
+// Endpoint exports
+export { default as checkout } from "./api/checkout/route";
+export { default as commits } from "./api/commits/route";
 
-export type { Commit } from "./types";
+// Type exports
+export type { Commit } from "./types/commit";

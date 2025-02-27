@@ -1,24 +1,44 @@
 {
-  "name": "next-git-viewer",
+  "name": "@sammce/next-git-viewer",
   "version": "0.0.1",
   "description": "See the git history of a file in a Next.js app",
   "repository": "sammce/next-git-viewer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "bin": {
+    "ngv": "dist/ngv.js"
+  },
   "scripts": {
-    "build": "tsc"
+    "copy-styles": "cp src/components/styles.module.css dist/components/styles.module.css",
+    "build": "tsc && pnpm copy-styles",
+    "watch": "nodemon --exec 'pnpm build' --ext ts,tsx,css --ignore dist",
+    "publish": "pnpm build && pnpm publish --access public"
   },
   "keywords": [],
   "author": "Sam McElligott",
   "license": "ISC",
   "packageManager": "pnpm@10.4.1",
   "dependencies": {
-    "next": "^15.0.0",
-    "react": "^19.0.0"
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "clsx": "^2.1.1",
+    "react": "^18.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.5",
     "@types/react": "^19.0.10",
+    "nodemon": "^3.1.9",
     "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "next": "^14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

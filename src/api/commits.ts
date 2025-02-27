@@ -1,7 +1,7 @@
 import { exec } from "child_process";
 import { promisify } from "util";
 import { NextApiRequest, NextApiResponse } from "next";
-import type { Commit } from "../types";
+import type { Commit } from "@/types/commit";
 
 const execAsync = promisify(exec);
 

@@ -1,0 +1,67 @@
+.dark .wrapper {
+  --next-git-background-color: rgb(51, 51, 51);
+  --next-git-text-color: rgb(245, 245, 245);
+  --next-git-shadow: none;
+  --next-git-border-color: rgb(85, 85, 85);
+}
+
+.wrapper {
+  --next-git-background-color: rgb(255, 255, 255);
+  --next-git-text-color: rgb(51, 51, 51);
+  --next-git-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  --next-git-border-color: rgb(221, 221, 221);
+  --next-git-border-radius: 0.5rem;
+
+  @media (prefers-color-scheme: dark) {
+    --next-git-background-color: rgb(51, 51, 51);
+    --next-git-text-color: rgb(245, 245, 245);
+    --next-git-shadow: none;
+    --next-git-border-color: rgb(85, 85, 85);
+  }
+
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: var(--next-git-background-color);
+  padding: 0.8rem;
+  border-radius: 0rem var(--next-git-border-radius) var(--next-git-border-radius) var(--next-git-border-radius);
+  width: 400px;
+  transition: width 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--next-git-border-color);
+
+  &::before {
+    content: "Next Git Viewer";
+    position: absolute;
+    top: -1.99rem;
+    left: -1px;
+    width: 60%;
+    height: 2rem;
+    padding: 0.5rem;
+    border-radius: var(--next-git-border-radius) var(--next-git-border-radius) 0rem 0rem;
+    background-color: var(--next-git-background-color);
+    border: 1px solid var(--next-git-border-color);
+    border-bottom: none;
+  }
+}
+
+.withError {
+  & .error {
+    color: red;
+    background-color: rgba(255, 70, 87, 0.1);
+    margin-bottom: 0.5rem;
+    border-radius: calc(var(--next-git-border-radius) / 2);
+    padding: 0.5rem;
+  }
+}
+
+.button {
+  background-color: #3f7bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
