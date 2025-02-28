@@ -1,23 +1,25 @@
-name: Publish to npm
+name: CI/CD - Release & Publish
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
           registry-url: "https://registry.npmjs.org/"
-          scope: "@sammce"
+          scope: "@your-username"
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -25,10 +27,36 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build package
+      - name: Run Linter & Tests
+        run: |
+          pnpm lint
+          pnpm test
+
+      - name: Check for Changeset
+        id: changesets
+        run: |
+          pnpm changeset status
+          pnpm changeset version
+          git add .
+          git commit -m "chore: bump version and update changelog" || echo "No changeset found"
+
+      - name: Push Version Bump
+        run: git push --follow-tags
+        if: steps.changesets.outputs.hasChanges == 'true'
+
+      - name: Build Package
         run: pnpm build
 
       - name: Publish to npm
         run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v$(jq -r .version package.json)
+          name: Release v$(jq -r .version package.json)
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
